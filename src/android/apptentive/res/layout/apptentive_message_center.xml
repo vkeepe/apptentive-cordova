@@ -76,27 +76,5 @@
                        android:clickable="true"
                        android:src="@drawable/android_ic_action_send"/>
         </LinearLayout>
-        <FrameLayout android:id="@+id/apptentive_branding_view"
-                     android:layout_width="fill_parent"
-                     android:layout_height="24dp"
-                     android:background="@android:color/black">
-            <RelativeLayout android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:gravity="bottom|center_horizontal">
-                <TextView android:id="@+id/apptentive_message_center_powered_by_text"
-                          android:layout_width="wrap_content"
-                          android:layout_height="fill_parent"
-                          android:gravity="bottom"
-                          android:paddingBottom="4dp"
-                          android:paddingRight="4dp"
-                          android:textSize="12sp"
-                          android:textColor="#CCCCCC"
-                          android:text="Powered by"/>
-                <ImageView android:layout_width="100dp"
-                           android:layout_height="fill_parent"
-                           android:src="@drawable/apptentive_logo_reverse"
-                           android:layout_toRightOf="@+id/apptentive_message_center_powered_by_text"/>
-            </RelativeLayout>
-        </FrameLayout>
     </LinearLayout>
 </FrameLayout>
