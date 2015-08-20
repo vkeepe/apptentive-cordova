@@ -17,7 +17,7 @@
     <color name="apptentive_message_auto_separator">#BBBBBB</color>
     <color name="apptentive_message_auto_text">#000000</color>
 
-    <color name="apptentive_dialog_background">#FFFFFF</color>
+    <color name="apptentive_dialog_background">#EBF4F7</color>
     <color name="apptentive_dialog_form_text">#000000</color>
 
     <color name="apptentive_dialog_button_negative">#DDDDDD</color>
@@ -41,12 +41,12 @@
     <color name="apptentive_dialog_button_positive_border_focused">#00769D</color>
 
     <color name="apptentive_activity_frame">#99000000</color>
-    <color name="apptentive_activity_background">#FFFFFF</color>
+    <color name="apptentive_activity_background">#EBF4F7</color>
 
     <color name="apptentive_survey_title_text">#000000</color>
     <color name="apptentive_survey_separator">#56B8D8</color>
     <color name="apptentive_survey_content_background">#D7D7D7</color>
-    <color name="apptentive_survey_question_background">#FFFFFF</color>
+    <color name="apptentive_survey_question_background">#EBF4F7</color>
     <color name="apptentive_survey_question_instruction_text">#000000</color>
     <color name="apptentive_survey_question_instruction_text_valid">#56B8D8</color>
     <color name="apptentive_survey_question_instruction_background_valid">#D6E9F0</color>
