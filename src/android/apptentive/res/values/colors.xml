@@ -71,11 +71,11 @@
     <color name="apptentive_dialog_secondary">#FAFAFA</color>
     <color name="apptentive_dialog_title_text">#000000</color>
     <color name="apptentive_dialog_body_text">#757575</color>
-    <color name="apptentive_dialog_button_text_enabled">#5D96F5</color>
+    <color name="apptentive_dialog_button_text_enabled">#000000</color>
     <color name="apptentive_dialog_button_text_disabled">#757575</color>
     <color name="apptentive_dialog_hint_text">#757575</color>
 
-    <color name="apptentive_dialog_button_default">#56B8D8</color>
+    <color name="apptentive_dialog_button_default">#4DD9FF</color>
     <color name="apptentive_dialog_button_hovered">#2699BF</color>
     <color name="apptentive_dialog_button_focused">#2699BF</color>
     <color name="apptentive_dialog_button_pressed">#2699BF</color>

@@ -51,6 +51,7 @@
             <meta-data android:name="apptentive_sdk_distribution" android:value="Cordova"/>
             <meta-data android:name="apptentive_sdk_distribution_version" android:value="1.7.0"/>
             <meta-data android:name="apptentive_initially_hide_branding" android:value="true"/>
+            <meta-data android:name="apptentive_log_level" android:value="INFO"/>
         </config-file>
 
         <!-- Copy over all the apptentive integration files and native SDK -->
