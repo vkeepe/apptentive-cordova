@@ -43,7 +43,8 @@
                         android:id="@+id/ok"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        apptentive:text="@string/apptentive_ok"/>
+                        apptentive:text="@string/apptentive_ok"
+                        style="@style/ApptentiveInteractionPositiveButton"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -30,9 +30,9 @@
     <color name="apptentive_dialog_button_negative_pressed_text">#000000</color>
     <color name="apptentive_dialog_button_negative_border_focused">#25A5CF</color>
 
-    <color name="apptentive_dialog_button_positive">#56B8D8</color>
+    <color name="apptentive_dialog_button_positive">#4DD9FF</color>
     <color name="apptentive_dialog_button_positive_text">#000000</color>
-    <color name="apptentive_dialog_button_positive_disabled">#D6E9F0</color>
+    <color name="apptentive_dialog_button_positive_disabled">#CBF4FF</color>
     <color name="apptentive_dialog_button_positive_disabled_text">#9BB8C2</color>
     <color name="apptentive_dialog_button_positive_focused">#2699BF</color>
     <color name="apptentive_dialog_button_positive_focused_text">#000000</color>
@@ -67,8 +67,8 @@
     <color name="apptentive_about_version">#AAAAAA</color>
 
 
-    <color name="apptentive_dialog_primary">#FAFAFA</color>
-    <color name="apptentive_dialog_secondary">#FAFAFA</color>
+    <color name="apptentive_dialog_primary">#EBF4F7</color>
+    <color name="apptentive_dialog_secondary">#EBF4F7</color>
     <color name="apptentive_dialog_title_text">#000000</color>
     <color name="apptentive_dialog_body_text">#757575</color>
     <color name="apptentive_dialog_button_text_enabled">#000000</color>

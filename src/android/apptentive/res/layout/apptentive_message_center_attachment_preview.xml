@@ -44,16 +44,26 @@
                           android:layout_width="fill_parent"
                           android:layout_height="wrap_content"
                           style="@style/ApptentiveDialogBottomArea"
-                          android:orientation="horizontal">
+                          android:orientation="horizontal"
+                          android:paddingLeft="30dp"
+                          android:paddingRight="30dp"
+                          android:gravity="center">
                 <com.apptentive.android.sdk.module.engagement.interaction.view.common.ApptentiveDialogButton
                         android:id="@+id/no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        style="@style/ApptentiveInteractionNegativeButton"
+                        android:layout_weight="1"
+                        android:paddingLeft="25dp"
                         apptentive:text="@string/apptentive_no"/>
                 <com.apptentive.android.sdk.module.engagement.interaction.view.common.ApptentiveDialogButton
                         android:id="@+id/yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="25dp"
+                        style="@style/ApptentiveInteractionPositiveButton"
                         apptentive:text="@string/apptentive_yes"/>
             </LinearLayout>
         </LinearLayout>
