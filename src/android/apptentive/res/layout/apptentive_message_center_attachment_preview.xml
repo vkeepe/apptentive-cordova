@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         style="@style/ApptentiveInteractionNegativeButton"
                         android:layout_weight="1"
-                        android:paddingLeft="25dp"
+                        android:paddingLeft="17dp"
                         apptentive:text="@string/apptentive_no"/>
                 <com.apptentive.android.sdk.module.engagement.interaction.view.common.ApptentiveDialogButton
                         android:id="@+id/yes"
@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_weight="1"
-                        android:paddingLeft="25dp"
+                        android:paddingLeft="17dp"
                         style="@style/ApptentiveInteractionPositiveButton"
                         apptentive:text="@string/apptentive_yes"/>
             </LinearLayout>
