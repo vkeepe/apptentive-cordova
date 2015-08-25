@@ -73,10 +73,6 @@ public class MessageCenterView extends FrameLayout implements MessageManager.OnS
 		}
 
 		TextView titleTextView = (TextView) findViewById(R.id.apptentive_message_center_header_title);
-		String titleText = Configuration.load(context).getMessageCenterTitle();
-		if (titleText != null) {
-			titleTextView.setText(titleText);
-		}
 
 		messageListView = (ListView) findViewById(R.id.apptentive_message_center_list);
 		messageListView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);

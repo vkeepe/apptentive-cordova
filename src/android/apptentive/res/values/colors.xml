@@ -6,9 +6,9 @@
   -->
 
 <resources>
-    <color name="apptentive_message_center_main_area_background">#E0E0E0</color>
-    <color name="apptentive_message_center_header_background">#222222</color>
-    <color name="apptentive_message_center_header_text">#FFFFFF</color>
+    <color name="apptentive_message_center_main_area_background">#EBF4F7</color>
+    <color name="apptentive_message_center_header_background">#E6E6E6</color>
+    <color name="apptentive_message_center_header_text">#000000</color>
     <color name="apptentive_message_center_header_text_shadow">#AAFFFFFF</color>
     <color name="apptentive_text_message_text">#000000</color>
     <color name="apptentive_message_sender_text">#222222</color>
@@ -69,8 +69,8 @@
 
     <color name="apptentive_dialog_primary">#EBF4F7</color>
     <color name="apptentive_dialog_secondary">#EBF4F7</color>
-    <color name="apptentive_dialog_title_text">#000000</color>
-    <color name="apptentive_dialog_body_text">#757575</color>
+    <color name="apptentive_dialog_title_text">#667394</color>
+    <color name="apptentive_dialog_body_text">#667394</color>
     <color name="apptentive_dialog_button_text_enabled">#000000</color>
     <color name="apptentive_dialog_button_text_disabled">#757575</color>
     <color name="apptentive_dialog_hint_text">#757575</color>

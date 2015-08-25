@@ -44,22 +44,18 @@
                           style="@style/ApptentiveDialogBottomArea"
                           android:orientation="vertical"
                           android:paddingLeft="30dp"
-                          android:paddingRight="30dp"
-                          android:gravity="center">
+                          android:paddingRight="30dp">
                 <com.apptentive.android.sdk.module.engagement.interaction.view.common.ApptentiveDialogButton
                         android:id="@+id/rate"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        style="@style/ApptentiveInteractionPositiveButton"
-                        android:paddingLeft="65dp"
-                        android:textAlignment="gravity"/>
+                        style="@style/ApptentiveInteractionPositiveButton"/>
                 <com.apptentive.android.sdk.module.engagement.interaction.view.common.ApptentiveDialogButton
                         android:id="@+id/remind"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         apptentive:text="@string/apptentive_rating_remind"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="50dp"
                         style="@style/ApptentiveInteractionNegativeButton"/>
                 <com.apptentive.android.sdk.module.engagement.interaction.view.common.ApptentiveDialogButton
                         android:id="@+id/decline"
@@ -67,7 +63,6 @@
                         android:layout_height="wrap_content"
                         apptentive:text="@string/apptentive_no_thanks"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="65dp"
                         style="@style/ApptentiveInteractionNegativeButton"/>
             </LinearLayout>
         </LinearLayout>
