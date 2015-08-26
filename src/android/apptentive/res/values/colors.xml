@@ -31,7 +31,7 @@
     <color name="apptentive_dialog_button_negative_pressed_text">#000000</color>
     <color name="apptentive_dialog_button_negative_border_focused">#25A5CF</color>
 
-    <color name="apptentive_dialog_button_positive">#4DD9FF</color>
+    <color name="apptentive_dialog_button_positive">#098FC1</color>
     <color name="apptentive_dialog_button_positive_text">#000000</color>
     <color name="apptentive_dialog_button_positive_disabled">#CBF4FF</color>
     <color name="apptentive_dialog_button_positive_disabled_text">#9BB8C2</color>
@@ -76,7 +76,7 @@
     <color name="apptentive_dialog_button_text_disabled">#757575</color>
     <color name="apptentive_dialog_hint_text">#757575</color>
 
-    <color name="apptentive_dialog_button_default">#4DD9FF</color>
+    <color name="apptentive_dialog_button_default">#098FC1</color>
     <color name="apptentive_dialog_button_hovered">#2699BF</color>
     <color name="apptentive_dialog_button_focused">#2699BF</color>
     <color name="apptentive_dialog_button_pressed">#2699BF</color>

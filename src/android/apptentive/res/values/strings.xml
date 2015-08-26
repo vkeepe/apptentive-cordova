@@ -58,7 +58,7 @@
     <string name="apptentive_survey_singleline_hint">Enter an answer…</string>
     <string name="apptentive_survey_send_response">Send Response</string>
 
-    <string name="apptentive_message_center_title">Help Center</string>
+    <string name="apptentive_message_center_title">HELP CENTER</string>
     <string name="apptentive_message_center_compose_hint">Type a message…</string>
     <string name="apptentive_message_center_attachment_title">Send image?</string>
 
