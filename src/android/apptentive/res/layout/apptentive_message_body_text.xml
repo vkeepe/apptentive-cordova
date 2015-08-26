@@ -15,5 +15,6 @@
               android:layout_height="wrap_content"
               android:textColor="@color/apptentive_text_message_text"
               android:gravity="center_vertical"
+              android:fontFamily="sans-serif-light"
               android:autoLink="all"/>
 </FrameLayout>

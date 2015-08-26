@@ -16,10 +16,11 @@
 
     <color name="apptentive_message_auto_separator">#BBBBBB</color>
     <color name="apptentive_message_auto_text">#000000</color>
-
+    <color name="keepe_message_footer_background">#071B50</color>
+    
     <color name="apptentive_dialog_background">#EBF4F7</color>
     <color name="apptentive_dialog_form_text">#000000</color>
-
+    
     <color name="apptentive_dialog_button_negative">#DDDDDD</color>
     <color name="apptentive_dialog_button_negative_text">#000000</color>
     <color name="apptentive_dialog_button_negative_disabled">#EBEBEB</color>

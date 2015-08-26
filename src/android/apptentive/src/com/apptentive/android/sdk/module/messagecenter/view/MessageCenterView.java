@@ -111,7 +111,13 @@ public class MessageCenterView extends FrameLayout implements MessageManager.OnS
 				Util.hideSoftKeyboard(context, view);
 			}
 		});
-
+        View backButton = findViewById(R.id.keepe_message_center_back_button);
+        backButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.onBackPressed();
+            }
+        });
 		View attachButton = findViewById(R.id.apptentive_message_center_attach_button);
 		// Android devices can't take screenshots until Android OS version 4+
 		boolean canTakeScreenshot = Util.getMajorOsVersion() >= 4;

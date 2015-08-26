@@ -23,7 +23,8 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center"
-                  android:textStyle="bold"
+                  android:textStyle="normal"
+                  android:fontFamily="sans-serif-light"
                   android:textColor="@color/apptentive_message_auto_text"
                   android:textSize="18sp"/>
         <FrameLayout android:layout_width="fill_parent"
@@ -35,6 +36,7 @@
                   android:paddingTop="8dp"
                   android:paddingLeft="10dp"
                   android:paddingRight="10dp"
+                  android:fontFamily="sans-serif-light"
                   android:textColor="@color/apptentive_message_auto_text"/>
     </LinearLayout>
 </FrameLayout>
