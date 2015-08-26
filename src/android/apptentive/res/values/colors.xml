@@ -33,11 +33,11 @@
 
     <color name="apptentive_dialog_button_positive">#098FC1</color>
     <color name="apptentive_dialog_button_positive_text">#000000</color>
-    <color name="apptentive_dialog_button_positive_disabled">#CBF4FF</color>
+    <color name="apptentive_dialog_button_positive_disabled">#10BDFD</color>
     <color name="apptentive_dialog_button_positive_disabled_text">#9BB8C2</color>
-    <color name="apptentive_dialog_button_positive_focused">#2699BF</color>
+    <color name="apptentive_dialog_button_positive_focused">#087198</color>
     <color name="apptentive_dialog_button_positive_focused_text">#000000</color>
-    <color name="apptentive_dialog_button_positive_pressed">#2699BF</color>
+    <color name="apptentive_dialog_button_positive_pressed">#087198</color>
     <color name="apptentive_dialog_button_positive_pressed_text">#000000</color>
     <color name="apptentive_dialog_button_positive_border_focused">#00769D</color>
 
@@ -77,7 +77,7 @@
     <color name="apptentive_dialog_hint_text">#757575</color>
 
     <color name="apptentive_dialog_button_default">#098FC1</color>
-    <color name="apptentive_dialog_button_hovered">#2699BF</color>
-    <color name="apptentive_dialog_button_focused">#2699BF</color>
-    <color name="apptentive_dialog_button_pressed">#2699BF</color>
+    <color name="apptentive_dialog_button_hovered">#087198</color>
+    <color name="apptentive_dialog_button_focused">#087198</color>
+    <color name="apptentive_dialog_button_pressed">#087198</color>
 </resources>
