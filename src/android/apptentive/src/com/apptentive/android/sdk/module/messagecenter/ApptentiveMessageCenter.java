@@ -237,7 +237,7 @@ public class ApptentiveMessageCenter {
 				break;
 			case message_center:
 				dialog.setTitle(R.string.apptentive_intro_dialog_title_default);
-				dialog.setBody(activity.getResources().getString(R.string.apptentive_intro_dialog_body, appDisplayName));
+				dialog.setBody(activity.getResources().getString(R.string.message_intro_dialog_body, appDisplayName));
 				break;
 			default:
 				return;

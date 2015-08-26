@@ -13,7 +13,7 @@
     <string name="apptentive_developer">Developer</string>
     <string name="apptentive_oops">Oops!</string>
     <string name="apptentive_send">Send</string>
-    <string name="apptentive_give_feedback">Give Feedback</string>
+    <string name="apptentive_give_feedback">Get Help</string>
     <string name="apptentive_thanks">Thanks!</string>
     <string name="apptentive_no_thanks">No thanks</string>
     <string name="apptentive_thank_you">Thank You</string>
@@ -41,8 +41,9 @@
     <string name="apptentive_rating_error">We\'re unable to find this app in the store. Please visit the store to find and rate it.</string>
 
     <string name="apptentive_intro_dialog_title_no_love">@string/apptentive_were_sorry</string>
-    <string name="apptentive_intro_dialog_title_default">Thanks for your feedback!</string>
+    <string name="apptentive_intro_dialog_title_default">Get Help</string>
     <string name="apptentive_intro_dialog_body">Please let us know how to make %s better for you!</string>
+    <string name="message_intro_dialog_body">Please let us know how we can help.</string>
     <string name="apptentive_intro_dialog_edittext_hint">Tell us how we can help. (required)</string>
 
     <string name="apptentive_thank_you_dialog_body">Your response has been saved in the Help Center, where you\'ll be able to view replies and send us other messages.</string>
@@ -65,7 +66,7 @@
     <!-- This is a Java format. -->
     <string name="apptentive_message_sent_timestamp_format">MMM dd, yyyy h:mma</string>
 
-    <string name="apptentive_message_auto_body_manual">If you have questions, suggestions, concerns, or just want to get in touch, please send us a message. We love talking with our customers!</string>
+    <string name="apptentive_message_auto_body_manual">Please let us know how we can help. We love talking with our customers!</string>
     <string name="apptentive_message_auto_body_no_love">What can we do to ensure that you love our app? We appreciate your constructive feedback.</string>
 
     <string name="apptentive_rating_provider_no_google_play">Google Play was not found. Please install Google Play before rating this app.</string>
