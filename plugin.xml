@@ -56,6 +56,9 @@
 
         <!-- Copy over all the apptentive integration files and native SDK -->
         <framework src="src/android/apptentive" custom="true"/>
+        <!-- 
+        <source-file src="src/android/apptentive/build-extras.gradle" target-dir="src/.." />
+         -->
         <source-file src="src/android/ApptentiveBridge.java" target-dir="src/com/apptentive/cordova"/>
         <source-file src="src/android/JsonHelper.java" target-dir="src/com/apptentive/cordova"/>
     </platform>
