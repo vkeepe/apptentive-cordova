@@ -29,6 +29,8 @@
             <feature name="ApptentiveBridge">
                 <param name="android-package" value="com.apptentive.cordova.ApptentiveBridge"/>
             </feature>
+            <access origin="https://api.apptentive-beta.com" />
+            <access origin="https://api.apptentive.com" />
         </config-file>
 
         <!-- Setup Android Manifest file for plugin -->
@@ -77,6 +79,8 @@
             <feature name="ApptentiveBridge">
                 <param name="ios-package" value="ApptentiveBridge"/>
             </feature>
+            <access origin="https://api.apptentive-beta.com" />
+            <access origin="https://api.apptentive.com" />
         </config-file>
 
         <config-file target="*-Info.plist" parent="ApptentiveAPIKey">
