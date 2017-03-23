@@ -27,11 +27,6 @@ var Apptentive = {
         cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["unreadMessageCount"]);
     },
 
-    pause: function (successCallback, errorCallback) {
-        console.log("Apptentive.pause()");
-        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["pause"]);
-    },
-
     putRatingProviderArg: function (successCallback, errorCallback, key, value) {
         successCallback(); // Does nothing on iOS.
     },
@@ -44,24 +39,27 @@ var Apptentive = {
         cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["removeCustomPersonData", key]);
     },
 
-    resume: function (successCallback, errorCallback) {
-        console.log("Apptentive.resume()");
-        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["resume"]);
+    setPersonEmail: function (successCallback, errorCallback, email) {
+        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["setProperty", "personEmailAddress", email]);
     },
 
-    setInitialUserEmail: function (successCallback, errorCallback, email) {
-        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["setProperty", "initialUserEmailAddress", email]);
+    getPersonEmail: function (successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["getProperty", "personEmailAddress"]);
     },
 
-    setInitialUserName: function (successCallback, errorCallback, name) {
-        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["setProperty", "initialUserName", name]);
+    setPersonName: function (successCallback, errorCallback, name) {
+        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["setProperty", "personName", name]);
+    },
+
+    getPersonName: function (successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["getProperty", "personName"]);
     },
 
     setRatingProvider: function (successCallback, errorCallback, ratingProviderName) {
         successCallback(); // Does nothing on iOS.
     },
 
-    setUnreadMessagesListener: function (unreadMessagesCallback, errorCallback) {
+    addUnreadMessagesListener: function (unreadMessagesCallback, errorCallback) {
         cordova.exec(unreadMessagesCallback, errorCallback, "ApptentiveBridge", "execute", ["registerForMessageNotifications"]);
     },
 
@@ -73,12 +71,20 @@ var Apptentive = {
         }
     },
 
-    willShowInteraction: function (successCallback, errorCallback, eventName) {
-        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["willShowInteraction", eventName]);
+    canShowInteraction: function (successCallback, errorCallback, eventName) {
+        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["canShowInteraction", eventName]);
+    },
+
+    canShowMessageCenter: function (successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["canShowMessageCenter"]);
     },
 
     setProperty: function (successCallback, errorCallback, key, value) {
         cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["setProperty", key, value]);
+    },
+
+    getProperty: function (successCallback, errorCallback, key, value) {
+        cordova.exec(successCallback, errorCallback, "ApptentiveBridge", "execute", ["getProperty", key]);
     }
 };
 

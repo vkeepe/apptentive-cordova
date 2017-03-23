@@ -1,6 +1,6 @@
 # Apptentive iOS SDK
 
-The Apptentive iOS SDK provides a simple and powerful channel to communicate in-app with your customers. 
+The Apptentive iOS SDK provides a simple and powerful channel to communicate in-app with your customers.
 
 Use Apptentive features to improve your app's App Store ratings, collect and respond to customer feedback, show surveys at specific points within your app, and more.
 
@@ -12,6 +12,8 @@ The following guides explain the integration process:
 
  - [Xcode project setup guide](http://www.apptentive.com/docs/ios/setup/xcode/)
  - [CocoaPods installation guide](http://www.apptentive.com/docs/ios/setup/cocoapods)
+ 
+ As of version 3.3.1, we also support Carthage. 
 
 ## Using Apptentive in your App
 
@@ -20,11 +22,21 @@ After integrating the Apptentive SDK into your project, you can [begin using App
 You should begin by setting your app's API key, then engaging Apptentive events at various places in your app:
 
 ``` objective-c
-#import "ATConnect.h"
+#import "Apptentive.h"
 ...
-[ATConnect sharedConnection].apiKey = @"APPTENTIVE_API_KEY";
+Apptentive.shared.APIKey = @"<Your API Key>";
 ...
-[[ATConnect sharedConnection] engage:@"event_name" fromViewController:viewController];
+[Apptentive.shared engage:@"event_name" fromViewController:viewController];
+```
+
+Or, in Swift:
+
+``` Swift
+import Apptentive
+...
+Apptentive.shared.APIKey = "<Your API Key>"
+...
+Apptentive.shared.engage(event: "event_name", from: viewController)
 ```
 
 Later, on your Apptentive dashboard, you will target these events with Apptentive features such as Message Center, Ratings Prompts, and Surveys.
@@ -33,7 +45,7 @@ Please see our [iOS integration guide](http://www.apptentive.com/docs/ios/integr
 
 ## API Documentation
 
-Please see our docs site for the Apptentive iOS SDK's [API documentation](http://www.apptentive.com/docs/ios/api/Classes/ATConnect.html).
+Please see our docs site for the Apptentive iOS SDK's [API documentation](http://www.apptentive.com/docs/ios/api/Classes/Apptentive.html).
 
 Apptentive's [API changelog](docs/APIChanges.md) is also updated with each release of the SDK.
 
@@ -41,13 +53,11 @@ Apptentive's [API changelog](docs/APIChanges.md) is also updated with each relea
 
 Please see the [Apptentive testing guide](http://www.apptentive.com/docs/ios/testing/) for directions on how to test that the Rating Prompt, Surveys, and other Apptentive features have been configured correctly.
 
-## Apptentive Demo App
+# Apptentive Example App
 
-The Apptentive sample application `FeedbackDemo` is included in this repository along with the SDK.
+To see an example of how the Apptentive iOS SDK can be integrated with your app, take a look at the `iOSExample` app in the `Example` directory in this repository.
 
-Use FeedbackDemo to test Apptentive's features before integrating the SDK in your app. Edit the `defines.h` file to include your Apptentive **API Key** and iTunes **App ID** where specified.
-
-Message Center, the Ratings Prompt, Surveys, and [other Apptentive interactions](http://www.apptentive.com/docs/ios/features/) can all be tested before integrating Apptentive in your own app. 
+The example app shows you how to integrate using CocoaPods, set your API key, engage events, and integrate with Message Center. See the `README.md` file in the `Example` directory for more information.
 
 ## Contributing
 
@@ -58,4 +68,3 @@ Our client code is completely [open source](LICENSE.txt), and we welcome contrib
 If you experience an issue with the Apptentive SDK, please [open a GitHub issue](https://github.com/apptentive/apptentive-ios/issues?direction=desc&sort=created&state=open).
 
 If the request is urgent, please contact <mailto:support@apptentive.com>.
-

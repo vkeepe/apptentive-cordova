@@ -1,5 +1,0 @@
-ext.postBuildExtras = {
-    android {
-        useLibrary 'org.apache.http.legacy'
-    }
-}

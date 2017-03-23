@@ -1,6 +1,21 @@
 #import "ApptentiveBridge.h"
+#import "Apptentive.h"
 
-@implementation ApptentiveBridge
+@implementation ApptentiveBridge  {
+    BOOL apptentiveInitted;
+    BOOL registeredForMessageNotifications;
+    NSString* messageNotificationCallback;
+}
+
+ - (void)pluginInitialize {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+     id<ApptentiveStyle> styleSheet = [Apptentive sharedConnection].styleSheet;
+     if ([styleSheet respondsToSelector:@selector(didBecomeActive:)]) {
+         [styleSheet performSelector:@selector(didBecomeActive:) withObject:nil];
+     }
+#pragma clang diagnostic pop
+ }
 
 - (void)execute:(CDVInvokedUrlCommand*)command {
     NSString* callbackId = [command callbackId];
@@ -9,7 +24,8 @@
         return;
     }
     NSString* functionCall = [command argumentAtIndex:0];
-    
+    NSLog(@"Function call: %@",functionCall);
+
     //initialization
     if ([functionCall isEqualToString:@"deviceReady"]) {
         [self initAPIKey:callbackId];
@@ -19,41 +35,19 @@
         [self sendFailureMessage:@"Apptentive API key is not set" callbackId:callbackId];
         return;
     }
-    
+
     //all other functions
-    if ([functionCall isEqualToString:@"addAmazonSnsPushIntegration"]) {
-        [self addAmazonSNSIntegrationWithDeviceToken:[command arguments] callBackString:callbackId];
-    }
-    else if ([functionCall isEqualToString:@"addCustomDeviceData"]) {
+    if ([functionCall isEqualToString:@"addCustomDeviceData"]) {
         [self addCustomDeviceData:[command arguments] callBackString:callbackId];
     }
     else if ([functionCall isEqualToString:@"addCustomPersonData"]) {
         [self addCustomPersonData:[command arguments] callBackString:callbackId];
     }
-    else if ([functionCall isEqualToString:@"addIntegration"]) {
-        [self addIntegration:[command arguments] callBackString:callbackId];
-    }
-    else if ([functionCall isEqualToString:@"addIntegrationWithDeviceToken"]) {
-        [self addIntegration:[command arguments] callBackString:callbackId];
-    }
-    else if ([functionCall isEqualToString:@"addParsePushIntegration"]) {
-        [self addParseIntegrationWithDeviceToken:[command arguments] callBackString:callbackId];
-    }
-    else if ([functionCall isEqualToString:@"addUrbanAirshipPushIntegration"]) {
-        [self addUrbanAirshipIntegrationWithDeviceToken:[command arguments] callBackString:callbackId];
-    }
     else if ([functionCall isEqualToString:@"engage"]) {
         [self engage:[command arguments] callBackString:callbackId];
     }
-    else if ([functionCall isEqualToString:@"forwardPushNotificationToApptentive"]) {
-        [self forwardPushNotificationToApptentive:[command arguments] callBackString:callbackId];
-    }
     else if ([functionCall isEqualToString:@"openAppStore"]) {
         [self openAppStore];
-    }
-    else if ([functionCall isEqualToString:@"pause"]) {
-        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        [self.commandDelegate sendPluginResult:result callbackId:callbackId];
     }
     else if ([functionCall isEqualToString:@"showMessageCenter"]) {
         [self showMessageCenter:[command arguments] callBackString:callbackId];
@@ -61,24 +55,11 @@
     else if ([functionCall isEqualToString:@"registerForMessageNotifications"]) {
         [self registerForMessageNotifications:[command arguments] callBackString:callbackId];
     }
-    else if ([functionCall isEqualToString:@"registerForRateNotifications"]) {
-        [self registerForRateNotifications:[command arguments] callBackString:callbackId];
-    }
-    else if ([functionCall isEqualToString:@"registerForSurveyNotifications"]) {
-        [self registerForSurveyNotifications:[command arguments] callBackString:callbackId];
-    }
     else if ([functionCall isEqualToString:@"removeCustomDeviceData"]) {
         [self removeCustomDeviceData:[command arguments] callBackString:callbackId];
     }
     else if ([functionCall isEqualToString:@"removeCustomPersonData"]) {
         [self removeCustomPersonData:[command arguments] callBackString:callbackId];
-    }
-    else if ([functionCall isEqualToString:@"removeIntegration"]) {
-        [self removeIntegration:[command arguments] callBackString:callbackId];
-    }
-    else if ([functionCall isEqualToString:@"resume"]) {
-        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        [self.commandDelegate sendPluginResult:result callbackId:callbackId];
     }
     else if ([functionCall isEqualToString:@"sendAttachmentFileWithMimeType"]) {
         [self sendAttachmentFileWithMimeType:[command arguments] callBackString:callbackId];
@@ -92,21 +73,26 @@
     else if ([functionCall isEqualToString:@"setProperty"]) {
         [self setProperty:[command arguments] callBackString:callbackId];
     }
+    else if ([functionCall isEqualToString:@"getProperty"]) {
+        [self getProperty:[command arguments] callBackString:callbackId];
+    }
     else if ([functionCall isEqualToString:@"unreadMessageCount"]) {
         [self unreadMessageCount:callbackId];
     }
     else if ([functionCall isEqualToString:@"unregisterForNotifications"]) {
         [self unregisterForNotifications];
     }
-    else if ([functionCall isEqualToString:@"willShowInteraction"]) {
-        [self willShowInteraction:[command arguments] callBackString:callbackId];
+    else if ([functionCall isEqualToString:@"canShowInteraction"]) {
+        [self canShowInteraction:[command arguments] callBackString:callbackId];
     }
-
+    else if ([functionCall isEqualToString:@"canShowMessageCenter"]) {
+        [self canShowMessageCenter:callbackId];
+    }
     else {
         //command not recognized
         [self sendFailureMessage:@"Command not recognized" callbackId:callbackId];
     }
-    
+
 }
 
 - (void)sendSuccessMessage:(NSString*)msg callbackId:(NSString *)callbackId {
@@ -150,6 +136,7 @@
     // Access Info.plist for ApptentiveAPIKey
     NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
     NSString *apiKey = [infoPlist objectForKey:@"ApptentiveAPIKey"];
+    NSString *pluginVersion = [infoPlist objectForKey:@"ApptentivePluginVersion"];
 
     NSLog(@"Initializing Apptentive API Key: %@", apiKey);
 
@@ -158,44 +145,22 @@
         return;
     }
     if (![apiKey isEqualToString:@""]) {
-        [ATConnect sharedConnection].apiKey = apiKey;
+        [[Apptentive sharedConnection] setAPIKey:apiKey distributionName:@"Cordova" distributionVersion:pluginVersion];
         apptentiveInitted = YES;
     }
 }
 
 - (void) registerForMessageNotifications:(NSArray*)arguments callBackString:(NSString*)callbackId {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadMessageCountChanged:) name:ATMessageCenterUnreadCountChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadMessageCountChanged:) name:ApptentiveMessageCenterUnreadCountChangedNotification object:nil];
     registeredForMessageNotifications = YES;
     messageNotificationCallback = callbackId;
 }
 
-- (void) registerForRateNotifications:(NSArray*)arguments callBackString:(NSString*)callbackId {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAgreedToRateNotification:) name:ATAppRatingFlowUserAgreedToRateAppNotification object:nil];
-    registeredForRateNotifications = YES;
-    rateNotificationCallback = callbackId;
-}
-
-- (void) registerForSurveyNotifications:(NSArray*)arguments callBackString:(NSString*)callbackId {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveySentNotification:) name:ATSurveySentNotification object:nil];
-    registeredForSurveyNotifications = YES;
-    surveyNotificationCallback = callbackId;
-}
-
 - (void) unregisterForNotifications {
     if (registeredForMessageNotifications) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ATMessageCenterUnreadCountChangedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ApptentiveMessageCenterUnreadCountChangedNotification object:nil];
         registeredForMessageNotifications = NO;
         messageNotificationCallback = nil;
-    }
-    if (registeredForRateNotifications) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ATAppRatingFlowUserAgreedToRateAppNotification object:nil];
-        registeredForSurveyNotifications = NO;
-        surveyNotificationCallback = nil;
-    }
-    if (registeredForSurveyNotifications) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ATSurveySentNotification object:nil];
-        registeredForSurveyNotifications = NO;
-        surveyNotificationCallback = nil;
     }
 }
 
@@ -206,17 +171,9 @@
     // Unread message count is contained in the notification's userInfo dictionary.
     NSNumber *unreadMessageCount = [notification.userInfo objectForKey:@"count"];
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[unreadMessageCount intValue]];
+    [result setKeepCallback:[NSNumber numberWithBool:YES]];
     [self.commandDelegate sendPluginResult:result callbackId:messageNotificationCallback];
 }
-
-- (void) userAgreedToRateNotification:(NSNotification *)notification {
-    [self sendSuccessMessage:@"rate notification" callbackId:rateNotificationCallback];
-}
-
-- (void) surveySentNotification:(NSNotification *)notification {
-    [self sendSuccessMessage:@"survey notification" callbackId:surveyNotificationCallback];
-}
-
 
 #pragma mark Properties and Interface Customization
 
@@ -228,63 +185,64 @@
     NSString *property_id = [arguments objectAtIndex:1];
     NSString *value = [arguments objectAtIndex:2];
     if ([property_id isEqualToString:@"appID"]) {
-        [ATConnect sharedConnection].appID = value;
+        [Apptentive sharedConnection].appID = value;
     }
-    else if ([property_id isEqualToString:@"showEmailField"]) {
-        [ATConnect sharedConnection].showEmailField = [self parseBoolValue:value];
+    else if ([property_id isEqualToString:@"personName"]) {
+        [Apptentive sharedConnection].personName = value;
     }
-    else if ([property_id isEqualToString:@"customPlaceholderText"]) {
-        [ATConnect sharedConnection].customPlaceholderText = value;
-    }
-//    else if ([property_id isEqualToString:@"useMessageCenter"]) {
-//        //warning - useMessageCenter is deprecated
-//        [ATConnect sharedConnection].useMessageCenter = [self parseBoolValue:value];
-//    }
-    else if ([property_id isEqualToString:@"initiallyUseMessageCenter"]) {
-        [ATConnect sharedConnection].initiallyUseMessageCenter = [self parseBoolValue:value];
-    }
-    else if ([property_id isEqualToString:@"initialUserName"]) {
-        [ATConnect sharedConnection].initialUserName = value;
-    }
-    else if ([property_id isEqualToString:@"initialUserEmailAddress"]) {
-        [ATConnect sharedConnection].initialUserEmailAddress = value;
-    }
-    else if ([property_id isEqualToString:@"tintColor"]) {
-        NSArray *colorValues = [value componentsSeparatedByString:@","];
-        if (colorValues == nil || colorValues.count < 4) {
-            [self sendFailureMessage:@"TintColor not set with 4 comma separated float values" callbackId:callbackId];
-        }
-        UIColor* tintColor = [UIColor colorWithRed:[[colorValues objectAtIndex:0] floatValue] green:[[colorValues objectAtIndex:1] floatValue] blue:[[colorValues objectAtIndex:2] floatValue] alpha:[[colorValues objectAtIndex:3] floatValue]];
-        [ATConnect sharedConnection].tintColor = tintColor;
+    else if ([property_id isEqualToString:@"personEmailAddress"]) {
+        [Apptentive sharedConnection].personEmailAddress = value;
     }
     else {
         [self sendFailureMessage:@"Property name not recognized" callbackId:callbackId];
     }
 }
 
-#pragma mark Methods
+- (void) getProperty:(NSArray*)arguments callBackString:(NSString*)callbackId {
+    if (arguments.count < 2) {
+        [self sendFailureMessage:@"Insufficient arguments for getting property" callbackId:callbackId];
+        return;
+    }
+    NSString *property_id = [arguments objectAtIndex:1];
+    NSString *value = nil;
+    if ([property_id isEqualToString:@"appID"]) {
+        value = [Apptentive sharedConnection].appID;
+    }
+    else if ([property_id isEqualToString:@"personName"]) {
+        value = [Apptentive sharedConnection].personName;
+    }
+    else if ([property_id isEqualToString:@"personEmailAddress"]) {
+        value = [Apptentive sharedConnection].personEmailAddress;
+    }
+    else {
+        [self sendFailureMessage:@"Property name not recognized" callbackId:callbackId];
+        return;
+    }
 
-- (void) addAmazonSNSIntegrationWithDeviceToken:(NSArray*)arguments callBackString:(NSString*)callbackId  {
-    NSString* deviceToken = [arguments objectAtIndex:1];
-    NSData* data = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
-    [[ATConnect sharedConnection] addAmazonSNSIntegrationWithDeviceToken:data];
+    [self sendSuccessMessage:value callbackId:callbackId];
 }
+
+#pragma mark Methods
 
 - (void) addCustomDeviceData:(NSArray*)arguments callBackString:(NSString*)callbackId {
     NSString* key = [arguments objectAtIndex:1];
     id value = [arguments objectAtIndex:2];
     if ([value isKindOfClass:[NSString class]]) {
         NSString* stringData = value;
-        [[ATConnect sharedConnection] addCustomDeviceData:stringData withKey:key];
+        [[Apptentive sharedConnection] addCustomDeviceDataString:stringData withKey:key];
     }
-//    else if ([value isKindOfClass:[NSNumber class]]) {
-//        NSDate* dateData = value;
-//        [[ATConnect sharedConnection] addCustomDeviceData:dateData withKey:key];
-//    }
-//    else if ([value isKindOfClass:[NSNumber class]]) {
-//        NSNumber* numberData = value;
-//        [[ATConnect sharedConnection] addCustomDeviceData:numberData withKey:key];
-//    }
+    else if ([value isKindOfClass:[NSNumber class]] ) {
+        if (value == [NSNumber numberWithBool:YES] || value == [NSNumber numberWithBool:NO]) {
+            NSNumber* boolData = value;
+            [[Apptentive sharedConnection] addCustomDeviceDataBool:boolData.boolValue withKey:key];
+        } else {
+            NSNumber* numberData = value;
+            [[Apptentive sharedConnection] addCustomDeviceDataNumber:numberData withKey:key];
+        }
+    } else {
+        [self sendFailureMessage:@"Custom Device data type not recognized" callbackId:callbackId];
+        return;
+    }
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
@@ -294,43 +252,22 @@
     id value = [arguments objectAtIndex:2];
     if ([value isKindOfClass:[NSString class]]) {
         NSString* stringData = value;
-        [[ATConnect sharedConnection] addCustomPersonData:stringData withKey:key];
+        [[Apptentive sharedConnection] addCustomPersonDataString:stringData withKey:key];
     }
-//    else if ([value isKindOfClass:[NSNumber class]]) {
-//        NSDate* dateData = value;
-//        [[ATConnect sharedConnection] addCustomPersonData:dateData withKey:key];
-//    }
-//    else if ([value isKindOfClass:[NSNumber class]]) {
-//        NSNumber* numberData = value;
-//        [[ATConnect sharedConnection] addCustomPersonData:numberData withKey:key];
-//    }
+    else if ([value isKindOfClass:[NSNumber class]] ) {
+        if (value == [NSNumber numberWithBool:YES] || value == [NSNumber numberWithBool:NO]) {
+            NSNumber* boolData = value;
+            [[Apptentive sharedConnection] addCustomPersonDataBool:boolData.boolValue withKey:key];
+        } else {
+            NSNumber* numberData = value;
+            [[Apptentive sharedConnection] addCustomPersonDataNumber:numberData withKey:key];
+        }
+    } else {
+        [self sendFailureMessage:@"Custom Person data type not recognized" callbackId:callbackId];
+        return;
+    }
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
-}
-
-- (void) addIntegration:(NSArray*)arguments callBackString:(NSString*)callbackId {
-    NSString* integration = [arguments objectAtIndex:1];
-    NSDictionary *configuration = [self parseDictionaryFromString:[arguments objectAtIndex:2]];
-    [[ATConnect sharedConnection] addIntegration:integration withConfiguration:configuration];
-}
-
-- (void) addIntegrationWithDeviceToken:(NSArray*)arguments callBackString:(NSString*)callbackId  {
-    NSString* integration = [arguments objectAtIndex:1];
-    NSString* deviceToken = [arguments objectAtIndex:2];
-    NSData* token = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
-    [[ATConnect sharedConnection] addIntegration:integration withDeviceToken:token];
-}
-
-- (void) addParseIntegrationWithDeviceToken:(NSArray*)arguments callBackString:(NSString*)callbackId  {
-    NSString* deviceToken = [arguments objectAtIndex:1];
-    NSData* data = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
-    [[ATConnect sharedConnection] addParseIntegrationWithDeviceToken:data];
-}
-
-- (void) addUrbanAirshipIntegrationWithDeviceToken:(NSArray*)arguments callBackString:(NSString*)callbackId  {
-    NSString* deviceToken = [arguments objectAtIndex:1];
-    NSData* data = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
-    [[ATConnect sharedConnection] addUrbanAirshipIntegrationWithDeviceToken:data];
 }
 
 - (void)engage:(NSArray*)arguments callBackString:(NSString*)callbackId {
@@ -341,7 +278,7 @@
     }
     BOOL shown = false;
     if (arguments.count == 2) {
-        shown = [[ATConnect sharedConnection] engage:eventLabel fromViewController:self.viewController];
+        shown = [[Apptentive sharedConnection] engage:eventLabel fromViewController:self.viewController];
     }
     else if (arguments.count == 3) {
         NSDictionary *customData = [self parseDictionaryFromString:[arguments objectAtIndex:2]];
@@ -349,7 +286,7 @@
             [self sendFailureMessage:@"Improperly formed json or object for engage custom data" callbackId:callbackId];
             return;
         }
-        shown = [[ATConnect sharedConnection] engage:eventLabel withCustomData:customData fromViewController:self.viewController];
+        shown = [[Apptentive sharedConnection] engage:eventLabel withCustomData:customData fromViewController:self.viewController];
     }
     CDVPluginResult* result = [CDVPluginResult
                                resultWithStatus:CDVCommandStatus_OK
@@ -357,41 +294,29 @@
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
 
-- (void) forwardPushNotificationToApptentive:(NSArray*)arguments callBackString:(NSString*)callbackId {
-    NSDictionary *userInfo = [self parseDictionaryFromString:[arguments objectAtIndex:1]];
-    [[ATConnect sharedConnection] didReceiveRemoteNotification:userInfo fromViewController:self.viewController];
-}
-
 - (void) openAppStore {
-    [[ATConnect sharedConnection] openAppStore];
+    [[Apptentive sharedConnection] openAppStore];
 }
 
 - (void) showMessageCenter:(NSArray*)arguments callBackString:(NSString*)callbackId  {
     if (arguments.count == 2) {
         NSDictionary *customData = [self parseDictionaryFromString:[arguments objectAtIndex:1]];
-        [[ATConnect sharedConnection] presentMessageCenterFromViewController:self.viewController withCustomData:customData];
+        [[Apptentive sharedConnection] presentMessageCenterFromViewController:self.viewController withCustomData:customData];
     } else {
-        [[ATConnect sharedConnection] presentMessageCenterFromViewController:self.viewController];
+        [[Apptentive sharedConnection] presentMessageCenterFromViewController:self.viewController];
     }
 }
 
 - (void) removeCustomDeviceData:(NSArray*)arguments callBackString:(NSString*)callbackId {
     NSString* key = [arguments objectAtIndex:1];
-    [[ATConnect sharedConnection] removeCustomDeviceDataWithKey:key];
+    [[Apptentive sharedConnection] removeCustomDeviceDataWithKey:key];
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
 
 - (void) removeCustomPersonData:(NSArray*)arguments callBackString:(NSString*)callbackId {
     NSString* key = [arguments objectAtIndex:1];
-    [[ATConnect sharedConnection] removeCustomPersonDataWithKey:key];
-    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:result callbackId:callbackId];
-}
-
-- (void) removeIntegration:(NSArray*)arguments callBackString:(NSString*)callbackId {
-    NSString* integration = [arguments objectAtIndex:1];
-    [[ATConnect sharedConnection] removeIntegration:integration];
+    [[Apptentive sharedConnection] removeCustomPersonDataWithKey:key];
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
@@ -399,7 +324,7 @@
 - (void) sendAttachmentFileWithMimeType:(NSArray*)arguments callBackString:(NSString*)callbackId {
     NSData* data = [[arguments objectAtIndex:1] dataUsingEncoding:NSUTF8StringEncoding];
     NSString* mimeType = [arguments objectAtIndex:2];
-    [[ATConnect sharedConnection] sendAttachmentFile:data withMimeType:mimeType];
+    [[Apptentive sharedConnection] sendAttachmentFile:data withMimeType:mimeType];
 }
 
 - (void) sendAttachmentImage:(NSArray*)arguments callBackString:(NSString*)callbackId {
@@ -410,36 +335,41 @@
     if (attachmentImage == nil) {
         [self sendFailureMessage:@"Image could not be constructed from the passed data" callbackId:callbackId];
     }
-    [[ATConnect sharedConnection] sendAttachmentImage:attachmentImage];
+    [[Apptentive sharedConnection] sendAttachmentImage:attachmentImage];
 }
 
 - (void) sendAttachmentText:(NSArray*)arguments callBackString:(NSString*)callbackId {
     NSString* text = [arguments objectAtIndex:1];
-    [[ATConnect sharedConnection] sendAttachmentText:text];
+    [[Apptentive sharedConnection] sendAttachmentText:text];
 }
 
 - (void) unreadMessageCount:(NSString*)callbackId {
-    NSUInteger unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
+    NSUInteger unreadMessageCount = [[Apptentive sharedConnection] unreadMessageCount];
     CDVPluginResult* result = [CDVPluginResult
                                resultWithStatus:CDVCommandStatus_OK
                                messageAsInt:(int)unreadMessageCount];
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
 
-- (void)willShowInteraction:(NSArray*)arguments callBackString:(NSString*)callbackId {
+- (void)canShowInteraction:(NSArray*)arguments callBackString:(NSString*)callbackId {
     NSString* eventName = [arguments objectAtIndex:1];
     if([eventName isEqual:[NSNull null]]) {
         [self sendFailureMessage:@"Insufficient arguments to call willShowInteraction - eventName is null" callbackId:callbackId];
         return;
     }
-    BOOL willShow = [[ATConnect sharedConnection] willShowInteractionForEvent:eventName];
+    BOOL canShow = [[Apptentive sharedConnection] canShowInteractionForEvent:eventName];
     CDVPluginResult* result = [CDVPluginResult
                                resultWithStatus:CDVCommandStatus_OK
-                               messageAsBool:willShow];
+                               messageAsBool:canShow];
+    [self.commandDelegate sendPluginResult:result callbackId:callbackId];
+}
+
+- (void)canShowMessageCenter:(NSString *)callbackId {
+    BOOL canShow = [[Apptentive sharedConnection] canShowMessageCenter];
+    CDVPluginResult* result = [CDVPluginResult
+                               resultWithStatus:CDVCommandStatus_OK
+                               messageAsBool:canShow];
     [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
 
 @end
-
-
-
