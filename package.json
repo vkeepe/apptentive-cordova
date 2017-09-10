@@ -1,0 +1,38 @@
+{
+  "name": "apptentive-cordova",
+  "version": "3.4.1",
+  "description": "Apptentive Plugin For Cordova",
+  "cordova": {
+    "id": "com.apptentive.cordova",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apptentive/apptentive-cordova.git"
+  },
+  "keywords": [
+    "apptentive",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.6.0"
+    }
+  ],
+  "author": "Apptentive",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/apptentive/apptentive-cordova/issues"
+  },
+  "homepage": "https://github.com/apptentive/apptentive-cordova#readme",
+  "dependencies": {
+    "xcode": ">=0.9.3"
+  }
+}
+
